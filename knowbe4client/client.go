@@ -22,6 +22,9 @@ func (kb4 KnowBe4Client) NewRequest(ctx context.Context, path string, params url
 	u.RawQuery = params.Encode()
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer: %s", kb4.Token))
 	req.Header.Set("Accept", "application/json")
 
