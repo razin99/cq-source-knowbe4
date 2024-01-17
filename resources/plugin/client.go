@@ -70,13 +70,14 @@ func (c *Client) Tables(_ context.Context, options plugin.TableOptions) (schema.
 }
 
 func (*Client) Close(_ context.Context) error {
-	// TODO: Add your client cleanup here
 	return nil
 }
 
 func getTables() schema.Tables {
 	tables := schema.Tables{
-		services.SampleTable(),
+		services.TrainingEnrollmentsTable(),
+		services.AccountRiskScoreHistoryTable(),
+		services.UsersTable(),
 	}
 	if err := transformers.TransformTables(tables); err != nil {
 		panic(err)

@@ -3,17 +3,18 @@ package client
 import (
 	"context"
 
+	"github.com/razin99/cq-source-knowbe4/knowbe4client"
 	"github.com/rs/zerolog"
 )
 
 type Client struct {
-	logger zerolog.Logger
-	Spec   Spec
+	logger  zerolog.Logger
+	Spec    Spec
+	KnowBe4 *knowbe4client.KnowBe4Client
 }
 
 func (c *Client) ID() string {
-	// TODO: Change to either your plugin name or a unique dynamic identifier
-	return "ID"
+	return "knowbe4"
 }
 
 func (c *Client) Logger() *zerolog.Logger {
@@ -21,11 +22,13 @@ func (c *Client) Logger() *zerolog.Logger {
 }
 
 func New(ctx context.Context, logger zerolog.Logger, s *Spec) (Client, error) {
-	// TODO: Add your client initialization here
 	c := Client{
 		logger: logger,
 		Spec:   *s,
+		KnowBe4: &knowbe4client.KnowBe4Client{
+			BaseURL: s.BaseURL,
+			Token:   s.Token,
+		},
 	}
-
 	return c, nil
 }

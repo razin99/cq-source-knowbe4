@@ -7,9 +7,8 @@ A knowbe4 source plugin for CloudQuery that loads data from knowbe4 to any datab
 
 ## Links
 
- - [CloudQuery Quickstart Guide](https://www.cloudquery.io/docs/quickstart)
- - [Supported Tables](docs/tables/README.md)
-
+- [CloudQuery Quickstart Guide](https://www.cloudquery.io/docs/quickstart)
+- [Supported Tables](docs/tables/README.md)
 
 ## Configuration
 
@@ -18,13 +17,18 @@ The following source configuration file will sync to a PostgreSQL database. See 
 ```yaml
 kind: source
 spec:
-  name: "knowbe4"
-  path: "razin99/knowbe4"
-  version: "${VERSION}"
+  name: knowbe4
+  registry: local
+  path: ./cq-source-knowbe4
   destinations:
-    - "postgresql"
+    - csv
+  tables:
+    - knowbe4_training_enrollments
+    - knowbe4_account_risk_score_history
+    - knowbe4_users
   spec:
-    # plugin spec section
+    base_url: ${KB4_BASE_URL}
+    token: ${KB4_TOKEN}
 ```
 
 ## Development
@@ -50,7 +54,7 @@ make gen-docs
 ### Release a new version
 
 1. Run `git tag v1.0.0` to create a new tag for the release (replace `v1.0.0` with the new version number)
-2. Run `git push origin v1.0.0` to push the tag to GitHub  
+2. Run `git push origin v1.0.0` to push the tag to GitHub
 
 Once the tag is pushed, a new GitHub Actions workflow will be triggered to build the release binaries and create the new release on GitHub.
 To customize the release notes, see the Go releaser [changelog configuration docs](https://goreleaser.com/customization/changelog/#changelog).
