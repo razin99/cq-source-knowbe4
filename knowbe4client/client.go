@@ -2,7 +2,6 @@ package knowbe4client
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -32,7 +31,7 @@ func (kb4 KnowBe4Client) NewRequest(ctx context.Context, path string, params url
 	}
 
 	if res.StatusCode != 200 {
-		return nil, errors.New(fmt.Sprintf("HTTP Error: %d, Path: %s", res.StatusCode, req.URL.String()))
+		return nil, fmt.Errorf("HTTP Error: %d, Path: %s", res.StatusCode, req.URL.String())
 	}
 
 	return res, nil
