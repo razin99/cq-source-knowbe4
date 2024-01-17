@@ -19,5 +19,9 @@
 
 cq-source-knowbe4
 
+config.yaml
+output/
+.cq/
+
 dist
 *.log
