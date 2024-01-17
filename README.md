@@ -18,8 +18,9 @@ The following source configuration file will sync to a PostgreSQL database. See 
 kind: source
 spec:
   name: knowbe4
-  registry: local
-  path: ./cq-source-knowbe4
+  registry: github
+  path: razin99/knowbe4
+  version: ${VERSION}
   destinations:
     - csv
   tables:
